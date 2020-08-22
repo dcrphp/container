@@ -1,0 +1,18 @@
+{
+    "name": "dcrphp/container",
+    "description": "容器类，提供开箱即用的组件。",
+    "authors": [
+        {
+            "name": "HuanJun Huang"
+        }
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "DcrPHP\\Container\\": "src"
+        }
+    },
+    "require": {
+        "php": "^7.0"
+    }
+}
