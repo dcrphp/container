@@ -71,7 +71,6 @@ abstract class Helper
         $this->doc = $doc;
     }
 
-
     public function getDoc()
     {
         return PHP_EOL . "使用名:{$this->shortName}" . PHP_EOL . "类名:{$this->className}" . PHP_EOL . "composer添加:" . implode(',', $this->composerList) . PHP_EOL . '配置方式:' . $this->docConfig . PHP_EOL . '额外说明:' . $this->doc . PHP_EOL;
