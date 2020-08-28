@@ -4,23 +4,12 @@
 　　composer install dcrphp/container
 
 ## 2、说明
-　　容器类可以通过简单配置，就启动某个组件的支持  
+　　容器类可以通过简单配置，获取某个组件的支持  
 
 ## 3、使用
-```
-　　$clsConfig = new DcrPHP\Config\Config();
-　　$clsConfig->set('container', array('component'=>array('config'=>'DcrPHP\Config\Config','log'=>'DcrPHP\Log\Log')));
-　　$clsContainer = new Container();
-　　//取组件:
-　　$clsLog = $clsContainer->get('log'); //$clsContainer->get('DcrPHP\Log\Log');
-```    
+　　cd example  
+　　php index.php
 
-## 4、扩展
-　　请在src/Driver/目录下以Php.php为例加类，比如想加实别ini，添加Ini.php,调用时setDriver('ini')即可
-
-## 5、说明
-　　配置读取的以文件名为item名，比如app.php里的配置会读取成:  
-```
-　　$config['app']['default_timezone'] = 'PRC';
-　　$config['app']['debug'] = 1;
-``` 
+## 4、添加组件
+　　src/Helper添加组件的使用说明，参考Elasticsearch.php的类配置说明
+　　实现的组件类__construct()里要用DcrPHP\Config\Config初始化:public function __construct(DcrPHP\Config\Config $clsConfig)
