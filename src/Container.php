@@ -17,6 +17,11 @@ class Container implements ContainerInterface
     private static $instance = null;
 
     /**
+     * @var array 绑定的列表
+     */
+    private $autoBindList = [];
+
+    /**
      * @var array 用于存窗口的实例列表 这里存的是类名=>实例 如array('DcrPHP\Config\Config'=>$clsConfig)
      */
     private $instanceList = [];
@@ -42,8 +47,33 @@ class Container implements ContainerInterface
     {
         if (!self::$instance instanceof self) {
             self::$instance = new self();
+            self::$instance->autoBind();
         }
         return self::$instance;
+    }
+
+    /**
+     * @param $abstract 绑定名称
+     * @param null $concrete 名称或实例
+     */
+    public function bind($abstract, $concrete = null)
+    {
+        if (is_null($concrete)) {
+            $concrete = $abstract;
+        }
+
+        $this->autoBindList[$abstract] = $concrete;
+    }
+
+    /**
+     * 自动绑定的类
+     */
+    public function autoBind()
+    {
+        $alias = self::$instance->get('DcrPHP\\Config\\Config')->get('container.bind');
+        foreach ($alias as $key => $bindInfo) {
+            $this->bind($key, $bindInfo);
+        }
     }
 
     /**
@@ -64,6 +94,11 @@ class Container implements ContainerInterface
      */
     protected function getConcrete($abstract)
     {
+        //先从自动的绑定里找
+        if (isset($this->autoBindList[$abstract])) {
+            return $this->autoBindList[$abstract];
+        }
+        //再从定义里找
         if(!class_exists($abstract)){
             //类不存在 说明用的可能是短名
             //从component找到类名
