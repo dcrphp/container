@@ -70,9 +70,11 @@ class Container implements ContainerInterface
      */
     public function autoBind()
     {
-        $alias = self::$instance->get('DcrPHP\\Config\\Config')->get('container.bind');
-        foreach ($alias as $key => $bindInfo) {
-            $this->bind($key, $bindInfo);
+        $bindList = self::$instance->get('DcrPHP\\Config\\Config')->get('container.bind');
+        if ($bindList) {
+            foreach ($bindList as $key => $bindInfo) {
+                $this->bind($key, $bindInfo);
+            }
         }
     }
 
@@ -262,10 +264,11 @@ class Container implements ContainerInterface
     public function get($abstract)
     {
         if (!$this->has($abstract)) {
-            $this->make($abstract);
+            return $this->make($abstract);
+        } else {
+            $className = $this->getConcrete($abstract);
+            return $this->instanceList[$className];
         }
-        $className = $this->getConcrete($abstract);
-        return $this->instanceList[$className];
     }
 
     /**

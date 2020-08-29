@@ -27,6 +27,7 @@ $clsConfig = new Config(__DIR__ . DIRECTORY_SEPARATOR . 'config');
 #$clsConfig->set('container', array('bind'=>array('test'=>'Test')));
 #或在config下建立container.php 内容是:return array('bind'=>array('test'=>'Test'));
 
+
 $clsContainer = Container::getInstance();
 $clsContainer->setConfig($clsConfig);
 
