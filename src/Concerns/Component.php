@@ -10,7 +10,7 @@ abstract class Component
     protected $className;
     protected $composerList;
     protected $docConfig;
-    protected $doc;
+    protected $example;
 
     /**
      * 类的简化名 比如session config
@@ -72,16 +72,16 @@ abstract class Component
 
     /**
      * 启用组件要用到的composer列表
-     * @param $doc
+     * @param $example
      * @return mixed
      */
-    public function setDoc($doc)
+    public function setExample($example)
     {
-        $this->doc = $doc;
+        $this->example = $example;
     }
 
     public function getDoc()
     {
-        return PHP_EOL . "使用名:{$this->shortName}" . PHP_EOL . "类名:{$this->className}" . PHP_EOL . "composer添加:" . implode(',', $this->composerList) . PHP_EOL . '配置方式:' . $this->docConfig . PHP_EOL . '额外说明:' . $this->doc . PHP_EOL;
+        return PHP_EOL . "使用名:{$this->shortName}" . PHP_EOL . "类名:{$this->className}" . PHP_EOL . "composer添加:" . implode(',', $this->composerList) . PHP_EOL . '配置方式:' . $this->docConfig . PHP_EOL . '使用案例:' . $this->example . PHP_EOL;
     }
 }
