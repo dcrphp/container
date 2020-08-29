@@ -19,6 +19,8 @@ class Elasticsearch extends Component
         parent::setConfig("config目录建立elasticsearch.php，内容:return array('host'=>array('127.0.0.1:9200'))");
         parent::setDoc('使用方式:
             $clsConfig = new Config(__DIR__ . DIRECTORY_SEPARATOR . \'config\');
+            #$clsConfig = new Config();
+            #$clsConfig->set(\'elasticsearch\', array(\'host\' => array(\'127.0.0.1:9200\')));
             $clsContainer = new Container($clsConfig);
             $clsElasticsearch = $clsContainer->get("elasticsearch"); #elasticsearch的操作类(DcrPHP\\Data\\Elasticsearch)      
             $clsEs = $clsElasticsearch->getClient(); #elasticsearch的操作类(elasticsearch\elasticsearch):https://packagist.org/packages/elasticsearch/elasticsearch
