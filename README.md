@@ -4,7 +4,7 @@
 　　composer install dcrphp/container
 
 ## 2、说明
-　　容器类可以通过简单配置，获取某个组件的支持。Container只是做成了组件的开箱即用，而没有提供任何组件功能。  
+　　容器类可以通过简单配置，获取某个组件的支持。Container只是做成了组件的开箱即用，而没有实现或提供任何组件功能。  
 
 ## 3、使用
 　　cd example  
