@@ -20,7 +20,8 @@ class Elasticsearch extends Component
         parent::setDoc('使用方式:
             $clsConfig = new Config(__DIR__ . DIRECTORY_SEPARATOR . \'config\');
             $clsContainer = new Container($clsConfig);
-            $clsContainer->get("elasticsearch"); #elasticsearch的操作类(DcrPHP\\Data\\Elasticsearch)
+            $clsElasticsearch = $clsContainer->get("elasticsearch"); #elasticsearch的操作类(DcrPHP\\Data\\Elasticsearch)      
+            $clsEs = $clsElasticsearch->getClient(); #elasticsearch的操作类(elasticsearch\elasticsearch):https://packagist.org/packages/elasticsearch/elasticsearch
         ');
     }
 }
