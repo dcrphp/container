@@ -10,6 +10,7 @@
 　　cd example  
 　　php index.php
 
-## 4、添加组件流程
-　　src/Component添加组件的使用说明，参考Elasticsearch.php的类配置说明
-　　实现的组件类__construct()里要用DcrPHP\Config\Config初始化:public function __construct(DcrPHP\Config\Config $clsConfig)
+## 4、添加组件流程标准
+　　第一步：src/Component添加组件的说明。可参考Elasticsearch.php  
+　　第二步：组件的实现类只有一个要求：__construct()有且只能有一个参数：DcrPHP\Config\Config，如：public function __construct(DcrPHP\Config\Config $clsConfig)  
+　　第三步：组件打成composer包形式
