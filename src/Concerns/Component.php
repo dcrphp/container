@@ -4,7 +4,7 @@
 namespace DcrPHP\Container\Concerns;
 
 
-abstract class Helper
+abstract class Component
 {
     protected $shortName;
     protected $className;
@@ -39,6 +39,15 @@ abstract class Helper
     public function setClassName($className)
     {
         $this->className = $className;
+    }
+
+    /**
+     * 获取短名
+     * @return mixed
+     */
+    public function getClassName()
+    {
+        return $this->className;
     }
 
     /**

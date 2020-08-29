@@ -3,15 +3,16 @@
 declare(strict_types=1);
 
 
-namespace DcrPHP\Container\Helper;
+namespace DcrPHP\Container\Component;
 
 
-use DcrPHP\Container\Concerns\Helper;
+use DcrPHP\Container\Concerns\Component;
 
-class Elasticsearch extends Helper
+class Elasticsearch extends Component
 {
     public function __construct()
     {
+        #shortname应该为类名的小写，方便container找类
         parent::setShortName('elasticsearch');
         parent::setClassName('DcrPHP\\Data\\Elasticsearch');
         parent::setComposerList(array('dcrphp/data-elasticsearch'));
