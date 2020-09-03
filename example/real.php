@@ -21,10 +21,9 @@ $clsConfig = new Config(__DIR__ . DIRECTORY_SEPARATOR . 'config');
 
 //通过组件声明 就是通过定义src/Component下的类来声明
 #或在config下建立elasticsearch.php 内容是:return array('host'=>array('127.0.0.1:9200'));
-#$clsConfig->set('elasticsearch', array('host'=>array('127.0.0.1:9200'))); //组件声明
+$clsConfig->set('elasticsearch', array('host' => array('192.168.6.71:9200'))); //组件声明
 
 //通过bind绑定 如你想把 class Test{} 绑定给test则：
-# class Test{}
 #$clsConfig->set('container', array('bind'=>array('test'=>'Test')));
 #或在config下建立container.php 内容是:return array('bind'=>array('test'=>'Test'));
 
@@ -34,10 +33,13 @@ $clsContainer->setConfig($clsConfig);
 
 #使用elasticsearch
 $clsElasticsearch = $clsContainer->get('elasticsearch'); #获取了DcrPHP\Data\Elasticsearch的实例
-var_dump($clsElasticsearch);
-#$clsElasticsearch = $clsElasticsearch ? $clsElasticsearch : new DcrPHP\Data\Elasticsearch(); #无意义的代码之小技巧：代码提示
-#$clsEs = $clsElasticsearch->getClient();
+$clsElasticsearch = $clsElasticsearch ? $clsElasticsearch : new DcrPHP\Data\Elasticsearch(); #无意义的代码之小技巧：代码提示
+$clsEs = $clsElasticsearch->getClient();
+print_r($clsElasticsearch->getConfig());
 #var_dump($clsEs->get(array('index' => 'test', 'id' => 1)));
 
 #使用Test类
-#var_dump($clsContainer->get('test'));
+//通过bind绑定 如你想把 class Test{} 绑定给test则：
+class Test{}
+$clsConfig->set('container', array('bind'=>array('test'=>'Test')));
+var_dump($clsContainer->get('test'));
