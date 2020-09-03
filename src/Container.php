@@ -22,6 +22,11 @@ class Container implements ContainerInterface
     private $autoBindList = [];
 
     /**
+     * @var array 别名
+     */
+    private $alias = [];
+
+    /**
      * @var array 用于存窗口的实例列表 这里存的是类名=>实例 如array('DcrPHP\Config\Config'=>$clsConfig)
      */
     private $instanceList = [];
@@ -43,10 +48,14 @@ class Container implements ContainerInterface
     /**
      * 获取实例
      */
-    public static function getInstance()
+    public static function getInstance($clsConfig = null)
     {
         if (!self::$instance instanceof self) {
             self::$instance = new self();
+            if($clsConfig != null){
+                self::$instance->setConfig($clsConfig);
+                self::$instance->setAlias($clsConfig->get('container.alias'));
+            }
             self::$instance->autoBind();
         }
         return self::$instance;
@@ -70,9 +79,15 @@ class Container implements ContainerInterface
      */
     public function autoBind()
     {
-        $bindList = self::$instance->get('DcrPHP\\Config\\Config')->get('container.bind');
+        $bindList = self::$instance->get('DcrPHP\\Config\\Config')->get('container.auto_bind');
+        #pr($bindList);
         if ($bindList) {
             foreach ($bindList as $key => $bindInfo) {
+                //如果里没有 则从alisa里找到被绑定的对象
+                if( is_numeric($key) ){
+                    $key = $bindInfo;
+                    $bindInfo = $this->alias[$bindInfo] ? $this->alias[$bindInfo] : $bindInfo;
+                }
                 $this->bind($key, $bindInfo);
             }
         }
@@ -87,6 +102,11 @@ class Container implements ContainerInterface
         $this->instance("DcrPHP\Config\Config", $clsConfig);
     }
 
+    public function setAlias($alias)
+    {
+        $this->alias = $alias;
+    }
+
     /**
      * 获取绑定的实例类名
      *
@@ -96,7 +116,11 @@ class Container implements ContainerInterface
      */
     protected function getConcrete($abstract)
     {
-        //先从自动的绑定里找
+
+        //处理别名
+        $abstract = $this->alias[$abstract] ? $this->alias[$abstract] : $abstract;
+
+        //从自动绑定里找
         if (isset($this->autoBindList[$abstract])) {
             return $this->autoBindList[$abstract];
         }
@@ -106,7 +130,7 @@ class Container implements ContainerInterface
             //从component找到类名
             $className = "DcrPHP\\Container\\Component\\" . ucfirst($abstract);
             if(!class_exists($className)){
-                throw new \Exception('没有找到本类，请确定component下有这个类的定义');
+                throw new \Exception('没有找到本类[' . $className . ']，请确定component下有这个类的定义');
             }
             $cls = new $className();
             $abstract = $cls->getClassName();

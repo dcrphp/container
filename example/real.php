@@ -28,8 +28,7 @@ $clsConfig->set('elasticsearch', array('host' => array('192.168.6.71:9200'))); /
 #或在config下建立container.php 内容是:return array('bind'=>array('test'=>'Test'));
 
 
-$clsContainer = Container::getInstance();
-$clsContainer->setConfig($clsConfig);
+$clsContainer = Container::getInstance($clsConfig);
 
 #使用elasticsearch
 $clsElasticsearch = $clsContainer->get('elasticsearch'); #获取了DcrPHP\Data\Elasticsearch的实例
