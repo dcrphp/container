@@ -14,7 +14,7 @@
     },
     "require": {
         "php": "^7.0",
-        "dcrphp/config": "1.0.2",
+        "dcrphp/config": "*",
         "psr/container": "*"
     }
 }
