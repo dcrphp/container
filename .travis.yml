@@ -1,7 +1,7 @@
 language: php
 
 php:
-  - '7.0'
+  - '7.4'
 
 os:
   - linux
@@ -12,7 +12,6 @@ branches:
 
 install:
   - composer install --prefer-dist --optimize-autoloader --quiet
-  - composer require --dev php-coveralls/php-coveralls
   - composer require --dev squizlabs/php_codesniffer
 
 script:

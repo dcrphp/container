@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace DcrPHP\Container;
-
 
 use Psr\Container\ContainerInterface;
 
@@ -52,7 +50,7 @@ class Container implements ContainerInterface
     {
         if (!self::$instance instanceof self) {
             self::$instance = new self();
-            if($clsConfig != null){
+            if ($clsConfig != null) {
                 self::$instance->setConfig($clsConfig);
                 self::$instance->setAlias($clsConfig->get('container.alias'));
             }
@@ -84,7 +82,7 @@ class Container implements ContainerInterface
         if ($bindList) {
             foreach ($bindList as $key => $bindInfo) {
                 //如果里没有 则从alisa里找到被绑定的对象
-                if( is_numeric($key) ){
+                if (is_numeric($key)) {
                     $key = $bindInfo;
                     $bindInfo = $this->alias[$bindInfo] ? $this->alias[$bindInfo] : $bindInfo;
                 }
@@ -125,16 +123,16 @@ class Container implements ContainerInterface
             return $this->autoBindList[$abstract];
         }
         //再从定义里找
-        if(!class_exists($abstract)){
+        if (!class_exists($abstract)) {
             //类不存在 说明用的可能是短名
             //从component找到类名
             $className = "DcrPHP\\Container\\Component\\" . ucfirst($abstract);
-            if(!class_exists($className)){
+            if (!class_exists($className)) {
                 throw new \Exception('没有找到本类[' . $className . ']，请确定component下有这个类的定义');
             }
             $cls = new $className();
             $abstract = $cls->getClassName();
-            if(!class_exists($abstract)){
+            if (!class_exists($abstract)) {
                 self::classList($cls->getShortName());
                 throw new \Exception('没有这个类，请先配置好composer');
             }

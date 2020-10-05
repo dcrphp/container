@@ -39,6 +39,9 @@ print_r($clsElasticsearch->getConfig());
 
 #使用Test类
 //通过bind绑定 如你想把 class Test{} 绑定给test则：
-class Test{}
-$clsConfig->set('container', array('bind'=>array('test'=>'Test')));
+/*class Test
+{
+
+}*/
+$clsConfig->set('container', array('bind' => array('test' => 'Test')));
 var_dump($clsContainer->get('test'));

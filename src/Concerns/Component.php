@@ -1,8 +1,6 @@
 <?php
 
-
 namespace DcrPHP\Container\Concerns;
-
 
 abstract class Component
 {

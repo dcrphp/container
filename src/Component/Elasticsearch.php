@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace DcrPHP\Container\Component;
-
 
 use DcrPHP\Container\Concerns\Component;
 
