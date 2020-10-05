@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/dcrphp/container.svg?branch=master)](https://travis-ci.org/dcrphp/container) 
+[![Latest Stable Version](https://poser.pugx.org/dcrphp/container/v/stable.png)](https://packagist.org/packages/dcrphp/container) 
+[![Latest Unstable Version](https://poser.pugx.org/dcrphp/container/v/unstable.png)](https://packagist.org/packages/dcrphp/container)  
+
 # DcrPHP/Container容器类
 
 ## 1、安装
